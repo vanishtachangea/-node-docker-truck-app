@@ -1,0 +1,69 @@
+
+
+
+                        ##         .
+                  ## ## ##        ==
+               ## ## ## ## ##    ===
+           /"""""""""""""""""\___/ ===
+      ~~~ {~~ ~~~~ ~~~ ~~~~ ~~~ ~ /  ===- ~~~
+           \______ o           __/
+             \    \         __/
+              \____\_______/
+
+docker is configured to use the default machine with IP 192.168.99.101
+For help getting started, check out the docs at https://docs.docker.com
+
+
+Start interactive shell
+
+vanis@LAPTOP-02VG52ST MINGW64 /c/Program Files/Docker Toolbox
+$ mongo
+bash: mongo: command not found
+
+vanis@LAPTOP-02VG52ST MINGW64 /c/Program Files/Docker Toolbox
+$ docker ps --all
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                     PORTS                      NAMES
+dfbc741d2fea        mongo               "docker-entrypoint.s…"   4 minutes ago       Up 4 minutes               0.0.0.0:27017->27017/tcp   festive_franklin
+225513239ae7        mongo               "docker-entrypoint.s…"   5 minutes ago       Exited (1) 5 minutes ago                              tasks_mongodb2
+590fc4a60116        mongo               "docker-entrypoint.s…"   6 minutes ago       Exited (1) 6 minutes ago                              tasks_mongodb
+
+vanis@LAPTOP-02VG52ST MINGW64 /c/Program Files/Docker Toolbox
+$ docker exec -it dfbc741d2fea  mongo
+MongoDB shell version v4.2.8
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("f70fa6fe-d8bf-4873-9b57-1958a6eab6dc") }
+MongoDB server version: 4.2.8
+Server has startup warnings:
+2020-07-18T17:36:30.816+0000 I  STORAGE  [initandlisten]
+2020-07-18T17:36:30.816+0000 I  STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+2020-07-18T17:36:30.816+0000 I  STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+2020-07-18T17:36:31.491+0000 I  CONTROL  [initandlisten]
+2020-07-18T17:36:31.491+0000 I  CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2020-07-18T17:36:31.491+0000 I  CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2020-07-18T17:36:31.491+0000 I  CONTROL  [initandlisten]
+---
+Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+and anyone you share the URL with. MongoDB may use this information to make product
+improvements and to suggest MongoDB products and deployment options to you.
+
+To enable free monitoring, run the following command: db.enableFreeMonitoring()
+To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+
+> mongo
+2020-07-18T17:41:57.921+0000 E  QUERY    [js] uncaught exception: ReferenceError: mongo is not defined :
+@(shell):1:1
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> use testdb
+switched to db testdb
+> db.people.save({firstname:"f", lastname:"l"})
+WriteResult({ "nInserted" : 1 })
+> db.people.find({firstname:"f"})
+{ "_id" : ObjectId("5f1334b3feb4b7bc0271077c"), "firstname" : "f", "lastname" : "l" }
+>  
